@@ -1,0 +1,53 @@
+*{
+    padding: 0;
+    margin: 5px 0px 0px 5px;
+}
+
+body {
+    font: 16px/1.5  Arial, Verdana, Tahoma, sans-serif;
+    background-image: url(../images/bground.png);
+    color: #2d6938;
+}
+h1 {
+    padding-left: 5px;
+    font-family: Andalus;
+    font-style: italic;
+}
+#main{
+    width: 850px;
+    margin: 0 auto;
+}
+
+#header {
+    overflow: hidden;
+    margin: 10px 12px;
+    border: 2px solid #000000;
+    background: #ffffff;
+}
+#center{
+    background: #f8f8f8;
+    margin: 10px 12px;
+    border: 2px solid #000000;
+}
+
+#addNewClientForm{
+    height: 40px;
+    font-family: Arial;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid #c0c0c0;
+    margin-left: 0px;
+}
+#addButton {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-image: url("../images/add4.png");
+}
+#clientTable{
+}
+#search{
+    background: #f8f8f8;
+    margin: 10px 12px;
+    border: 2px solid #000000;
+}
