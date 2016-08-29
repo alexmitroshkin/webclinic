@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>PetClinic</display-name>
+
+    <description>Test</description>
+
+    <!--Main-->
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>ru.mitroshkin.servlets.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/clinic/</url-pattern>
+    </servlet-mapping>
+    <!--Add-->
+    <servlet>
+        <servlet-name>AddClientServlet</servlet-name>
+        <servlet-class>ru.mitroshkin.servlets.AddClientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddClientServlet</servlet-name>
+        <url-pattern>/clinic/add/</url-pattern>
+    </servlet-mapping>
+    <!--Edit-->
+    <servlet>
+        <servlet-name>EditClientServler</servlet-name>
+        <servlet-class>ru.mitroshkin.servlets.EditClientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditClientServler</servlet-name>
+        <url-pattern>/clinic/edit/</url-pattern>
+    </servlet-mapping>
+    <!--Delete-->
+    <servlet>
+        <servlet-name>DeleteClientServlet</servlet-name>
+        <servlet-class>ru.mitroshkin.servlets.DeleteClientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteClientServlet</servlet-name>
+        <url-pattern>/clinic/delete/</url-pattern>
+    </servlet-mapping>
+</web-app>
