@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ru.mitroshkin.model.pet.Pet" table="pet">
+        <id name="id" type="int" column="uid">
+            <generator class="identity"/>
+        </id>
+        <many-to-one name="client" column="client_id" class="ru.mitroshkin.model.Client" cascade="all"/>
+        <!--<property name="type" column="type" type="int"/>-->
+        <property name="type" column="type">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">ru.mitroshkin.model.pet.Type</param>
+            </type>
+        </property>
+        <property name="name" column="name" type="string"/>
+        <property name="age" column="age" type="int"/>
+    </class>
+</hibernate-mapping>
