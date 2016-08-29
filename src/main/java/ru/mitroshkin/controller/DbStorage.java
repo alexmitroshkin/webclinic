@@ -45,7 +45,7 @@ public class DbStorage implements Storage {
     @Override
     public int add(Client client) {
         try(PreparedStatement insClien = this.connection.prepareStatement("INSERT INTO client(\"fullname\") VALUES(?)", Statement.RETURN_GENERATED_KEYS);
-         PreparedStatement insPet = this.connection.prepareStatement("INSERT INTO pet(client_id, type, name, age) VALUES (?, ?, ?, ?)") ) {
+         PreparedStatement insPet = this.connection.prepareStatement("INSERT INTO pet(index, client_id, type, name, age) VALUES (?, ?, ?, ?, ?)") ) {
             insClien.setString(1,client.getFullName());
             insClien.executeUpdate();
             ResultSet rs = insClien.getGeneratedKeys();
@@ -55,10 +55,11 @@ public class DbStorage implements Storage {
             }
 
             for (Pet pet: client.getPets()) {
-                insPet.setInt(1,id);
-                insPet.setInt(2,pet.getType().ordinal());
-                insPet.setString(3, pet.getName());
-                insPet.setInt(4,pet.getAge());
+                insPet.setInt(1,client.getPets().indexOf(pet));
+                insPet.setInt(2,id);
+                insPet.setInt(3,pet.getType().ordinal());
+                insPet.setString(4, pet.getName());
+                insPet.setInt(5,pet.getAge());
                 insPet.executeUpdate();
             }
             return id;
@@ -103,26 +104,27 @@ public class DbStorage implements Storage {
                 getPetsStatment.setInt(1,id);
                 ResultSet rs = getPetsStatment.executeQuery();
                 while (rs.next()){
-                    Pet pet;
+
                     int petId = rs.getInt("uid");
                     int type = rs.getInt("type");
                     String name = rs.getString("name");
                     int age = rs.getInt("age");
-                    switch (type) {
-                        case 0:
-                            pet = new Dog();
-                            break;
-                        case 1:
-                            pet = new Cat();
-                            break;
-                        default:
-                            pet = new Dog();
-                    }
-                    pet.setId(id);
-                    pet.setClient(client);
-                    pet.setType(Type.values()[type]);
-                    pet.setName(name);
-                    pet.setAge(age);
+//                    switch (type) {
+//                        case 0:
+//                            pet = new Dog();
+//                            break;
+//                        case 1:
+//                            pet = new Cat();
+//                            break;
+//                        default:
+//                            pet = new Dog();
+//                    }
+//                    pet.setId(id);
+//                    pet.setClient(client);
+//                    pet.setType(Type.values()[type]);
+//                    pet.setName(name);
+//                    pet.setAge(age);
+                    Pet pet = new Pet(client, Type.values()[type], name, age);
                     pets.add(pet);
                 }
                 client.setPets(pets);
@@ -142,11 +144,12 @@ public class DbStorage implements Storage {
     @Override
     public void addPet(Client client, Pet pet) {
         int client_id = client.getId();
-        try(PreparedStatement ps = this.connection.prepareStatement("INSERT INTO pet(client_id, type, name, age) VALUES (?, ?, ?, ?)")) {
-            ps.setInt(1, client_id);
-            ps.setInt(2, pet.getType().ordinal());
-            ps.setString(3, pet.getName());
-            ps.setInt(4, pet.getAge());
+        try(PreparedStatement ps = this.connection.prepareStatement("INSERT INTO pet(index, client_id, type, name, age) VALUES (?, ?, ?, ?, ?)")) {
+            ps.setInt(1, client.getPets().size());
+            ps.setInt(2, client_id);
+            ps.setInt(3, pet.getType().ordinal());
+            ps.setString(4, pet.getName());
+            ps.setInt(5, pet.getAge());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -164,22 +167,22 @@ public class DbStorage implements Storage {
                 int type = rs.getInt("type");
                 String name = rs.getString("name");
                 int age = rs.getInt("age");
-                Pet pet;
-                switch (type) {
-                    case 0:
-                        pet = new Dog();
-                        break;
-                    case 1:
-                        pet = new Cat();
-                        break;
-                    default:
-                        pet = new Dog();
-                }
-                pet.setId(id);
-                pet.setClient(get(clientId));
-                pet.setType(Type.values()[type]);
-                pet.setName(name);
-                pet.setAge(age);
+                Pet pet = new Pet(get(clientId), Type.values()[type], name, age);
+//                switch (type) {
+//                    case 0:
+//                        pet = new Dog();
+//                        break;
+//                    case 1:
+//                        pet = new Cat();
+//                        break;
+//                    default:
+//                        pet = new Dog();
+//                }
+//                pet.setId(id);
+//                pet.setClient();
+//                pet.setType();
+//                pet.setName(name);
+//                pet.setAge(age);
                 petList.add(pet);
             }
         } catch (SQLException e) {

@@ -48,7 +48,7 @@ public class HibernateStorage implements Storage {
         int id = 0;
         try {
             tx = sesion.beginTransaction();
-            sesion.save(client);
+            id = (int) sesion.save(client);
             tx.commit();
         } catch (HibernateException e){
             if (tx!=null) tx.rollback();
