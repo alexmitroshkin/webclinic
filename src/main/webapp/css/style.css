@@ -13,24 +13,24 @@ h1 {
     font-family: Andalus;
     font-style: italic;
 }
-#main{
+.main{
     width: 850px;
     margin: 0 auto;
 }
 
-#header {
+.header {
     overflow: hidden;
     margin: 10px 12px;
     border: 2px solid #000000;
     background: #ffffff;
 }
-#center{
+.center{
     background: #f8f8f8;
     margin: 10px 12px;
     border: 2px solid #000000;
 }
 
-#addNewClientForm{
+.addNewClientForm{
     height: 40px;
     font-family: Arial;
     font-size: 22px;
@@ -38,15 +38,15 @@ h1 {
     border-bottom: 2px solid #c0c0c0;
     margin-left: 0px;
 }
-#addButton {
+.addButton {
     position: absolute;
     width: 24px;
     height: 24px;
     background-image: url("../images/add4.png");
 }
-#clientTable{
+.clientTable{
 }
-#search{
+.search{
     background: #f8f8f8;
     margin: 10px 12px;
     border: 2px solid #000000;

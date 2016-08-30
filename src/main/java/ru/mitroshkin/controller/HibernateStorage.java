@@ -48,7 +48,8 @@ public class HibernateStorage implements Storage {
         int id = 0;
         try {
             tx = sesion.beginTransaction();
-            id = (int) sesion.save(client);
+            sesion.save(client);
+            id = client.getId();
             tx.commit();
         } catch (HibernateException e){
             if (tx!=null) tx.rollback();
@@ -62,6 +63,7 @@ public class HibernateStorage implements Storage {
     @Override
     public void edit(Client client) {
         //TODO
+        throw new RuntimeException("Не реализован");
     }
 
     @Override
@@ -69,7 +71,8 @@ public class HibernateStorage implements Storage {
         Transaction tx = null;
         try (Session sesion = factory.openSession()){
             tx = sesion.beginTransaction();
-            Client client = get(id);
+            Client client = new Client();
+            client.setId(id);
             sesion.delete(client);
             tx.commit();
         }catch (HibernateException e){
@@ -100,14 +103,16 @@ public class HibernateStorage implements Storage {
 
     @Override
     public void addPet(Client client, Pet pet) {
-//        Transaction tx = null;
-//        try(Session sesion = factory.openSession();) {
-//            tx = sesion.beginTransaction();
-//            tx.commit();
-//        } catch (HibernateException e){
-//            if (tx!=null) tx.rollback();
-//            e.printStackTrace();
-//        }
+        Transaction tx = null;
+        try(Session sesion = factory.openSession();) {
+            tx = sesion.beginTransaction();
+            pet.setClient(client);
+            sesion.saveOrUpdate(pet);
+            tx.commit();
+        } catch (HibernateException e){
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
 
     }
 

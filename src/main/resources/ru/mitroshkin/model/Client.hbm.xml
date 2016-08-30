@@ -9,7 +9,7 @@
             This class contains the client detail.
         </meta>
         <id name="id" type="int" column="uid">
-            <generator class="native"/>
+            <generator class="identity"/>
         </id>
         <property name="fullName" column="fullname" type="string"/>
         <list name="pets" cascade="all" lazy="false">

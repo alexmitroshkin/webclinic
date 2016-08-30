@@ -6,13 +6,13 @@
     <link rel="stylesheet" type="text/css" href="/wpc/css/style.css" />
 </head>
 <body>
-    <div id="main">
-        <div id="header">
+    <div class="main">
+        <div class="header">
             <h1>Редактирование клиента</h1>
             <a href="${pageContext.servletContext.contextPath}/clinic/"><img src="/wpc/images/edit.jpg"></a>
         </div>
 
-        <div id="center">
+        <div class="center">
             ФИО: <input type="text" name="clientName" value="${client.fullName}" id="clientName">
             <h2>Добавить питомца</h2>
             <form action="${pageContext.servletContext.contextPath}/clinic/edit/" method='POST' id="editForm">

@@ -60,6 +60,7 @@ public class EditClientServlet extends HttpServlet {
         pet.setType(Type.values()[petType]);
         pet.setAge(petAge);
         pet.setClient(client);
+        client.getPets().add(pet);
         CLIENT_CACHE.addPet(client,pet);
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/edit/?id="+id));
     }

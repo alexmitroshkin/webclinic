@@ -11,21 +11,21 @@
 <body>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <div id="main">
-        <div id="header">
+    <div class="main">
+        <div class="header">
             <h1>Клиника домашних питомцев</h1>
             <a href="${pageContext.servletContext.contextPath}/clinic/"><img src="../images/logo.png"></a>
         </div>
 
-        <div id="center">
-            <div id="addNewClientForm">
+        <div class="center">
+            <div class="addNewClientForm">
                 <form action="${pageContext.servletContext.contextPath}/clinic/" method='GET'>
                     Добавить клиента:
-                    <input type="submit" name="addClient" value=" " id="addButton" />
+                    <input type="submit" name="addClient" value=" " class="addButton" />
                 </form>
             </div>
 
-            <div id="clientTable">
+            <div class="clientTable">
                 <table border="1">
                     <tr>
                         <th>Имя клиента</th>
@@ -52,12 +52,12 @@
             </div>
         </div>
 
-        <div id="search">
-            <h2 align="center">Поиск клиентов</h2>
-            <br>
-            <label for="name">Имя клиента: </label>
-            <input type="search" name="name" value="" id="name" />
-        </div>
+        <%--<div class="search">--%>
+            <%--<h2 align="center">Поиск клиентов</h2>--%>
+            <%--<br>--%>
+            <%--<label for="name">Имя клиента: </label>--%>
+            <%--<input type="search" name="name" value="" id="name" />--%>
+        <%--</div>--%>
     </div>
 
 </body>
