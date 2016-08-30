@@ -19,8 +19,7 @@
 ![db] (/screenshots/db.jpg)
 
 ### Развитие проекта:
-Paragraphs are separated by empty lines. Within a paragraph it's possible to have a line break,
-simply press <return> for a new line.
+Планируется написание тестов. Изменение css с применением bootstrap. 
+<return>
+Так как на данный момент проект больше похож на простую административную часть. В последующем собираюсь добавить Пользователей и разделить их правами. Добавить больше функционала пока не определился. 
 
-For example,
-like this.
