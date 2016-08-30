@@ -17,3 +17,10 @@
 
 ### Структура базы данных:
 ![db] (/screenshots/db.jpg)
+
+### Развитие проекта:
+Paragraphs are separated by empty lines. Within a paragraph it's possible to have a line break,
+simply press <return> for a new line.
+
+For example,
+like this.
