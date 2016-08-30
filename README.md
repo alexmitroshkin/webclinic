@@ -12,8 +12,8 @@
 ### Удаление клиента:
 ![delete] (/screenshots/delete_page.jpg)
 
- ### Структура проекта:
- ![structure] (/screenshots/structure.jpg)
+### Структура проекта:
+![structure] (/screenshots/structure.jpg)
 
- ### Структура базы данных:
- ![db] (/screenshots/db.jpg)
+### Структура базы данных:
+![db] (/screenshots/db.jpg)
