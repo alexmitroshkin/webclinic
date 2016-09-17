@@ -13,33 +13,33 @@ public class MemoryStroage implements Storage {
     private  final ConcurrentHashMap<Integer, Client> clients = new ConcurrentHashMap<Integer,Client>();
 
     @Override
-    public Collection<Client> values() {
+    public Collection<Client> listClients() {
         return clients.values();
     }
 
     @Override
-    public int add(final Client client) {
+    public int addClient(final Client client) {
         clients.put(client.getId(),client);
         return client.getId();
     }
 
     @Override
-    public void edit(final Client client) {
+    public void editClient(final Client client) {
         this.clients.replace(client.getId(), client);
     }
 
     @Override
-    public void delete(final int id) {
+    public void deleteClientById(final int id) {
         this.clients.remove(id);
     }
 
     @Override
-    public Client get(final int id) {
+    public Client getClientById(final int id) {
         return clients.get(id);
     }
 
     @Override
-    public Client findByName(final String name) {
+    public Client findClientByName(final String name) {
         for (final Client client: clients.values()){
             if (name.equals(client.getFullName()))
                 return client;
@@ -48,12 +48,12 @@ public class MemoryStroage implements Storage {
     }
 
     @Override
-    public void addPet(final Client client, final Pet pet) {
+    public void addPetToClient(final Client client, final Pet pet) {
         client.addPet(pet);
     }
 
     @Override
-    public Collection<Pet> getPets(final int id) {
+    public Collection<Pet> getClientPets(final int id) {
         return clients.get(id).getPets();
     }
 

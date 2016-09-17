@@ -2,17 +2,24 @@ package ru.mitroshkin.model.pet;
 
 import ru.mitroshkin.model.Client;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "pet")
 public class Pet {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "uid")
     private int id;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
-
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "type")
     private Type type;
-
+    @Column (name = "name")
     private String name;
-
+    @Column (name = "age")
     private int age;
 
     public Pet() {
@@ -76,5 +83,27 @@ public class Pet {
             year = "лет";
         }
         return String.format("%s: %s, Возраст: %d %s", getType(), getName(), getAge(), year);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (this != null ? client.hashCode() : 0);
+        result = 31 * result + (this != null ? this.type.hashCode() : 0);
+        result = 31 * result + (this != null ? this.age : 0);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj){
+            return true;
+        }
+        if (!(obj instanceof Pet)){
+            return false;
+        }
+        Pet pet = (Pet) obj;
+        if (name != null ? name.equals(pet.name) : pet.name != null) return false;
+        return !(client != null  ? !client.equals(pet.client) : pet.client != null);
     }
 }

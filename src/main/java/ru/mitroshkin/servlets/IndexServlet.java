@@ -28,7 +28,7 @@ public class IndexServlet extends HttpServlet {
         }else {
             defaultAction(req, resp);
         }
-        req.setAttribute("clients", CLIENT_CACHE.values());
+        req.setAttribute("clients", CLIENT_CACHE.listClients());
     }
 
     /**
@@ -50,7 +50,7 @@ public class IndexServlet extends HttpServlet {
      */
     private void defaultAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //if (req.getParameter("addClient")==null){
-        req.setAttribute("clients", CLIENT_CACHE.values());
+        req.setAttribute("clients", CLIENT_CACHE.listClients());
             forwardTo(req,resp,INDEX);
         //}
     }

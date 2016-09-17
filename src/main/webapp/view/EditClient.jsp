@@ -21,10 +21,6 @@
                 <option value="0">Собака
                 <option value="1">Кот
             </select>
-                Пол: <select name="petSex">
-                <option value="1">Мужской</option>
-                <option value="2">Женский</option>
-            </select>
                 Возраст: <input type="number" name="petAge" value="" id="petAge">
                 <input type="submit" name="addNewPet" value="Добавить питомца" id="addPettButton">
             </form>

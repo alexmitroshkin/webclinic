@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import ru.mitroshkin.model.Client;
 import ru.mitroshkin.model.pet.Pet;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,8 +24,7 @@ public class HibernateStorage implements Storage {
     }
 
     @Override
-    public Collection<Client> values() {
-
+    public Collection<Client> listClients() {
         List<Client> clients = null;
         Session session = factory.openSession();
         Transaction tx = null                ;
@@ -42,7 +42,7 @@ public class HibernateStorage implements Storage {
     }
 
     @Override
-    public int add(Client client) {
+    public int addClient(Client client) {
         Session sesion = factory.openSession();
         Transaction tx = null;
         int id = 0;
@@ -61,18 +61,17 @@ public class HibernateStorage implements Storage {
     }
 
     @Override
-    public void edit(Client client) {
+    public void editClient(Client client) {
         //TODO
         throw new RuntimeException("Не реализован");
     }
 
     @Override
-    public void delete(int id) {
+    public void deleteClientById(int id) {
         Transaction tx = null;
         try (Session sesion = factory.openSession()){
             tx = sesion.beginTransaction();
-            Client client = new Client();
-            client.setId(id);
+            Client client = getClientById(id);
             sesion.delete(client);
             tx.commit();
         }catch (HibernateException e){
@@ -82,7 +81,7 @@ public class HibernateStorage implements Storage {
     }
 
     @Override
-    public Client get(int id) {
+    public Client getClientById(int id) {
         Transaction tx = null;
         Client client = null;
         try (Session sesion = factory.openSession()){
@@ -97,12 +96,12 @@ public class HibernateStorage implements Storage {
     }
 
     @Override
-    public Client findByName(String name) {
-        return null;
+    public Client findClientByName(String name) {
+        throw new RuntimeException("Не реализован");
     }
 
     @Override
-    public void addPet(Client client, Pet pet) {
+    public void addPetToClient(Client client, Pet pet) {
         Transaction tx = null;
         try(Session sesion = factory.openSession();) {
             tx = sesion.beginTransaction();
@@ -117,10 +116,10 @@ public class HibernateStorage implements Storage {
     }
 
     @Override
-    public Collection<Pet> getPets(int id) {
+    public Collection<Pet> getClientPets(int id) {
         List<Pet> pets = null;
         Client client = null;
-        client = get(id);
+        client = getClientById(id);
         pets = client.getPets();
         return pets;
     }

@@ -2,8 +2,6 @@ package ru.mitroshkin.servlets;
 
 import ru.mitroshkin.controller.ClientCache;
 import ru.mitroshkin.model.Client;
-import ru.mitroshkin.model.pet.Cat;
-import ru.mitroshkin.model.pet.Dog;
 import ru.mitroshkin.model.pet.Pet;
 import ru.mitroshkin.model.pet.Type;
 
@@ -54,12 +52,6 @@ public class AddClientServlet extends HttpServlet {
 
         Client client;
         Pet pet;
-
-//        switch (petType){
-//            case 0 : pet = new Dog(); break;
-//            case 1 : pet = new Cat(); break;
-//            default: pet = new Dog();
-//        }
         pet = new Pet();
         client = new Client();
         client.setFullName(clientName);
@@ -73,7 +65,7 @@ public class AddClientServlet extends HttpServlet {
 
         client.setPets(pets);
 
-        CLIENT_CACHE.add(client);
+        CLIENT_CACHE.addClient(client);
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/"));
     }
 

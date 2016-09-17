@@ -1,8 +1,6 @@
 package ru.mitroshkin.controller;
 
 import ru.mitroshkin.model.Client;
-import ru.mitroshkin.model.pet.Cat;
-import ru.mitroshkin.model.pet.Dog;
 import ru.mitroshkin.model.pet.Pet;
 import ru.mitroshkin.model.pet.Type;
 
@@ -31,7 +29,7 @@ public class DbStorage implements Storage {
     }
 
     @Override
-    public Collection<Client> values() {
+    public Collection<Client> listClients() {
         List<Client> clients = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery("SELECT * FROM client");
@@ -43,7 +41,7 @@ public class DbStorage implements Storage {
     }
 
     @Override
-    public int add(Client client) {
+    public int addClient(Client client) {
         try(PreparedStatement insClien = this.connection.prepareStatement("INSERT INTO client(\"fullname\") VALUES(?)", Statement.RETURN_GENERATED_KEYS);
          PreparedStatement insPet = this.connection.prepareStatement("INSERT INTO pet(index, client_id, type, name, age) VALUES (?, ?, ?, ?, ?)") ) {
             insClien.setString(1,client.getFullName());
@@ -71,12 +69,12 @@ public class DbStorage implements Storage {
     }
 
     @Override
-    public void edit(Client client) {
+    public void editClient(Client client) {
         //TODO
     }
 
     @Override
-    public void delete(int id) {
+    public void deleteClientById(int id) {
         try(PreparedStatement deleteFromClient = this.connection.prepareStatement("DELETE FROM client WHERE uid=?");
         PreparedStatement deleteFromPet = this.connection.prepareStatement("DELETE FROM  pet WHERE client_id=?")) {
             deleteFromClient.setInt(1,id);
@@ -90,7 +88,7 @@ public class DbStorage implements Storage {
     }
 
     @Override
-    public Client get(int id) {
+    public Client getClientById(int id) {
         Client client = new Client();
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM client WHERE uid = ?");
              PreparedStatement getPetsStatment = connection.prepareStatement("SELECT * FROM pet WHERE client_id = ?")) {
@@ -109,21 +107,6 @@ public class DbStorage implements Storage {
                     int type = rs.getInt("type");
                     String name = rs.getString("name");
                     int age = rs.getInt("age");
-//                    switch (type) {
-//                        case 0:
-//                            pet = new Dog();
-//                            break;
-//                        case 1:
-//                            pet = new Cat();
-//                            break;
-//                        default:
-//                            pet = new Dog();
-//                    }
-//                    pet.setId(id);
-//                    pet.setClient(client);
-//                    pet.setType(Type.values()[type]);
-//                    pet.setName(name);
-//                    pet.setAge(age);
                     Pet pet = new Pet(client, Type.values()[type], name, age);
                     pets.add(pet);
                 }
@@ -136,13 +119,13 @@ public class DbStorage implements Storage {
     }
 
     @Override
-    public Client findByName(String name) {
+    public Client findClientByName(String name) {
         //TODO
         return null;
     }
 
     @Override
-    public void addPet(Client client, Pet pet) {
+    public void addPetToClient(Client client, Pet pet) {
         int client_id = client.getId();
         try(PreparedStatement ps = this.connection.prepareStatement("INSERT INTO pet(index, client_id, type, name, age) VALUES (?, ?, ?, ?, ?)")) {
             ps.setInt(1, client.getPets().size());
@@ -157,7 +140,7 @@ public class DbStorage implements Storage {
     }
 
     @Override
-    public Collection<Pet> getPets(int clientId) {
+    public Collection<Pet> getClientPets(int clientId) {
         List<Pet> petList = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM pet WHERE client_id = ?")) {
             statement.setInt(1, clientId);
@@ -167,22 +150,7 @@ public class DbStorage implements Storage {
                 int type = rs.getInt("type");
                 String name = rs.getString("name");
                 int age = rs.getInt("age");
-                Pet pet = new Pet(get(clientId), Type.values()[type], name, age);
-//                switch (type) {
-//                    case 0:
-//                        pet = new Dog();
-//                        break;
-//                    case 1:
-//                        pet = new Cat();
-//                        break;
-//                    default:
-//                        pet = new Dog();
-//                }
-//                pet.setId(id);
-//                pet.setClient();
-//                pet.setType();
-//                pet.setName(name);
-//                pet.setAge(age);
+                Pet pet = new Pet(getClientById(clientId), Type.values()[type], name, age);
                 petList.add(pet);
             }
         } catch (SQLException e) {
@@ -207,7 +175,7 @@ public class DbStorage implements Storage {
             int id = resultSet.getInt("uid");
             client.setId(id);
             client.setFullName(resultSet.getString("fullname"));
-            List<Pet> pets = (List) getPets(id);
+            List<Pet> pets = (List) getClientPets(id);
             client.setPets(pets);
             clients.add(client);
         }

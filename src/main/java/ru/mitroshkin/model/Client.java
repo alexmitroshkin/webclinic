@@ -8,22 +8,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by alex on 20.08.2016.
- */
+@Entity
+@Table(name = "client")
 public class Client{
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "uid")
     private int id;
-
+    @Column (name = "fullName")
     private String fullName;
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "client", orphanRemoval = true)
     private List<Pet> pets;
 
     public Client(){
     }
 
-    public Client(String fullName) {
+    public Client(int id, String fullName, List<Pet> pets) {
+        this.id = id;
         this.fullName = fullName;
+        this.pets = pets;
     }
 
     public int getId() {

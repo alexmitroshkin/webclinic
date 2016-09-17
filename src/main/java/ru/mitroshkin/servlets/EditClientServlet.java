@@ -2,8 +2,6 @@ package ru.mitroshkin.servlets;
 
 import ru.mitroshkin.controller.ClientCache;
 import ru.mitroshkin.model.Client;
-import ru.mitroshkin.model.pet.Cat;
-import ru.mitroshkin.model.pet.Dog;
 import ru.mitroshkin.model.pet.Pet;
 import ru.mitroshkin.model.pet.Type;
 
@@ -29,7 +27,7 @@ public class EditClientServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8"); //Для корректной работы с кирилицей
         if (req.getParameter("id")!=null) {
             id = Integer.parseInt(req.getParameter("id"));
-            req.setAttribute("client", CLIENT_CACHE.get(id));
+            req.setAttribute("client", CLIENT_CACHE.getClientById(id));
         }
         forwardTo(req,resp,EDIT_CLIENT);
 
@@ -49,19 +47,14 @@ public class EditClientServlet extends HttpServlet {
         int petAge = Integer.parseInt(req.getParameter("petAge"));
 
         Pet pet;
-//        if (petType == 0){
-//            pet = new Cat();
-//        }else if (petType == 1){
-//            pet = new Dog();
-//        }
         pet = new Pet();
-        Client client = CLIENT_CACHE.get(id);
+        Client client = CLIENT_CACHE.getClientById(id);
         pet.setName(petName);
         pet.setType(Type.values()[petType]);
         pet.setAge(petAge);
         pet.setClient(client);
         client.getPets().add(pet);
-        CLIENT_CACHE.addPet(client,pet);
+        CLIENT_CACHE.addPetToClient(client,pet);
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/edit/?id="+id));
     }
 

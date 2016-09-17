@@ -14,61 +14,55 @@ interface Storage {
      * Получить список всех клиентов
      * @return
      */
-    Collection<Client> values();
+    Collection<Client> listClients();
 
     /**
      * Добавить клиента
      * @param client
      * @return
      */
-    int add(Client client);
+    int addClient(Client client);
 
     /**
      * Изменить клиента
      * @param client
      */
-    void edit(Client client);
+    void editClient(Client client);
 
 
     /**
      * Удалить клиента по id
      * @param id
      */
-    void delete(int id);
+    void deleteClientById(int id);
 
     /**
      * Получить клиента по id
      * @param id
      * @return
      */
-    Client get(int id);
+    Client getClientById(int id);
 
     /**
      * Поиск клиента по имени
      * @param name
      * @return
      */
-    Client findByName(String name);
+    Client findClientByName(String name);
 
     /**
      * Добавление питомца клиенту
      * @param client
      * @param pet
      */
-    void addPet(Client client, Pet pet);
+    void addPetToClient(Client client, Pet pet);
 
     /**
      * Получить всех питомцев клиента
      * @param id
      * @return
      */
-    Collection<Pet> getPets(int id);
+    Collection<Pet> getClientPets(int id);
 
     void close();
-
-    //    /**
-//     * Создать id для добаления клиента
-//     * @return
-//     */
-//    int generateId();
 }
