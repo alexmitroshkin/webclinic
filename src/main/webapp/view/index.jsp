@@ -52,12 +52,15 @@
             </div>
         </div>
 
-        <%--<div class="search">--%>
-            <%--<h2 align="center">Поиск клиентов</h2>--%>
-            <%--<br>--%>
-            <%--<label for="name">Имя клиента: </label>--%>
-            <%--<input type="search" name="name" value="" id="name" />--%>
-        <%--</div>--%>
+        <div class="search">
+            <h2 align="center">Поиск клиентов</h2>
+            <br>
+            <form action="${pageContext.servletContext.contextPath}/clinic/search/" method='POST' id="editForm">
+                <label for="search">Имя клиента: </label>
+                <input type="search" name="searchName" value="" id="search" />
+                <input type="submit" name="searchClient" value="Искать" id="searchSub">
+            </form>
+        </div>
     </div>
 
 </body>

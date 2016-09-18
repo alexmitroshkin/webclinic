@@ -49,10 +49,8 @@ public class IndexServlet extends HttpServlet {
      * @throws IOException
      */
     private void defaultAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //if (req.getParameter("addClient")==null){
         req.setAttribute("clients", CLIENT_CACHE.listClients());
-            forwardTo(req,resp,INDEX);
-        //}
+        forwardTo(req,resp,INDEX);
     }
     /**
      * Перенаправление на указанный адрес
@@ -69,7 +67,7 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     public void destroy() {
-        super.destroy();
         CLIENT_CACHE.close();
+        super.destroy();
     }
 }

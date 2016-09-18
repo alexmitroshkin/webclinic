@@ -13,9 +13,11 @@
         </div>
 
         <div class="center">
-            ФИО: <input type="text" name="clientName" value="${client.fullName}" id="clientName">
-            <h2>Добавить питомца</h2>
             <form action="${pageContext.servletContext.contextPath}/clinic/edit/" method='POST' id="editForm">
+                ФИО: <input type="text" name="clientName" value="${client.fullName}" id="clientName">
+                <input type="submit" name="editClient" value="Изменить клиента" id="editClientButton">
+                <h2>Добавить питомца</h2>
+
                 Кличка питомца: <input type="text" name="petName" value="">
                 Тип: <select name="petType">
                 <option value="0">Собака

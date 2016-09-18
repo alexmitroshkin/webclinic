@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import ru.mitroshkin.model.Client;
 import ru.mitroshkin.model.pet.Pet;
 
@@ -12,9 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by alex on 28.08.2016.
- */
 public class HibernateStorage implements Storage {
 
     private final SessionFactory factory;
@@ -62,8 +60,15 @@ public class HibernateStorage implements Storage {
 
     @Override
     public void editClient(Client client) {
-        //TODO
-        throw new RuntimeException("Не реализован");
+        Transaction tx = null;
+        try(Session session = factory.openSession()) {
+            tx = session.beginTransaction();
+            session.saveOrUpdate(client);
+            tx.commit();
+        }catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -96,8 +101,20 @@ public class HibernateStorage implements Storage {
     }
 
     @Override
-    public Client findClientByName(String name) {
-        throw new RuntimeException("Не реализован");
+    public List<Client> findClientByName(String name) {
+        List<Client> findClients = null;
+        Transaction tx = null;
+        try(Session session = factory.openSession();) {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("select c from Client c  where c.fullName like :name ");
+            query.setParameter("name", "%"+name+"%");
+            findClients = query.list();
+            tx.commit();
+        }catch (HibernateException e){
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+        return findClients;
     }
 
     @Override

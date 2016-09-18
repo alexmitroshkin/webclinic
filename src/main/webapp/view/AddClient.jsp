@@ -18,8 +18,12 @@
                 <form action="${pageContext.servletContext.contextPath}/clinic/add/" method='POST' id="addForm">
                     ФИО: <input type="text" name="clientName" value="" id="clientID">
                     <br>
+
                     Кличка питомца: <input type="text" name="petName" value="" id="petID">
-                </select>
+                    Тип: <select name="petType">
+                    <option value="0">Собака
+                    <option value="1">Кот
+                    </select>
                     Возраст: <input type="number" name="petAge" value="" id="petAge">
                     <input type="submit" name="addNewClient" value="Добавить клиента" id="addClientButton">
 

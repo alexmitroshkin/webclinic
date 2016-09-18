@@ -84,7 +84,7 @@ public class AddClientServlet extends HttpServlet {
 
     @Override
     public void destroy() {
-        super.destroy();
         this.CLIENT_CACHE.close();
+        super.destroy();
     }
 }

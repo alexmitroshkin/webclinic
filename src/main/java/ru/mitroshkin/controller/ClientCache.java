@@ -4,12 +4,10 @@ import ru.mitroshkin.model.Client;
 import ru.mitroshkin.model.pet.Pet;
 
 import java.util.Collection;
+import java.util.List;
 
-/**
- * Created by alex on 23.08.2016.
- */
 public class ClientCache{
-    private static final ClientCache INSTANCE = new ClientCache();
+    private static final ClientCache INSTANCE =  new ClientCache();
 
     private final Storage storage = new HibernateStorage();
 
@@ -40,7 +38,7 @@ public class ClientCache{
         return storage.getClientById(id);
     }
 
-    public Client findClientByName(final String name) {
+    public List<Client> findClientByName(final String name) {
         return storage.findClientByName(name);
     }
 

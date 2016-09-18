@@ -4,6 +4,7 @@ import ru.mitroshkin.model.Client;
 import ru.mitroshkin.model.pet.Pet;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by alex on 25.08.2016.
@@ -48,7 +49,7 @@ interface Storage {
      * @param name
      * @return
      */
-    Client findClientByName(String name);
+    List<Client> findClientByName(String name);
 
     /**
      * Добавление питомца клиенту

@@ -38,7 +38,17 @@ public class EditClientServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8"); //Для корректной работы с кирилицей
         if (req.getParameter("addNewPet")!=null){
             addPet(req,resp, EDIT_CLIENT);
+        }else if(req.getParameter("editClient")!=null){
+            editClient(req,resp);
         }
+    }
+
+    private void editClient(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Client client = CLIENT_CACHE.getClientById(id);
+        String fullName = req.getParameter("clientName");
+        client.setFullName(fullName);
+        CLIENT_CACHE.editClient(client);
+        resp.sendRedirect(String.format("%s%s", req.getContextPath(), "/clinic/edit/?id="+id));
     }
 
     private void addPet(HttpServletRequest req, HttpServletResponse resp, String path) throws IOException {
@@ -73,7 +83,7 @@ public class EditClientServlet extends HttpServlet {
 
     @Override
     public void destroy() {
-        super.destroy();
         CLIENT_CACHE.close();
+        super.destroy();
     }
 }
