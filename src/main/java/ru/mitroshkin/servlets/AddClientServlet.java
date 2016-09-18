@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 23.08.2016.
- */
 public class AddClientServlet extends HttpServlet {
     /* Константы пути к файлам jsp */
     private static String ADD_CLIENT = "/view/AddClient.jsp";

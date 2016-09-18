@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 23.08.2016.
- */
 public class IndexServlet extends HttpServlet {
     /*Константы пути к jsp Страницам*/
     private static String ADD_CLIENT = "/view/AddClient.jsp";
@@ -28,7 +25,7 @@ public class IndexServlet extends HttpServlet {
         }else {
             defaultAction(req, resp);
         }
-        req.setAttribute("clients", CLIENT_CACHE.listClients());
+        //req.setAttribute("clients", CLIENT_CACHE.listClients());
     }
 
     /**

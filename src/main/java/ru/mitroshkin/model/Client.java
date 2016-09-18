@@ -122,8 +122,10 @@ public class Client{
 
     @Override
     public int hashCode() {
-        int result = fullName != null ? fullName.hashCode() : 0;
-        result = 31 * result + (pets != null ? pets.hashCode() : 0);
+        final int prime = 37;
+        int result = 1;
+        result = prime * result + (fullName != null ? fullName.hashCode() : 0);
+        result = prime * result + (pets != null ? pets.hashCode() : 0);
         return result;
     }
 
@@ -131,10 +133,10 @@ public class Client{
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-
         Client client = (Client) obj;
-        if (fullName != null ? fullName.equals(client.fullName) : client.fullName != null) return false;
-        return !(pets != null  ? !pets.equals(client.pets) : client.pets != null);
+        if (!this.fullName.equals(client.fullName)) return false;
+        if (!this.pets.equals(client.pets)) return false;
+        return true;
     }
 
     @Override

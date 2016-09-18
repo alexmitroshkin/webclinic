@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 23.08.2016.
- */
 public class DeleteClientServlet extends HttpServlet {
     private static final ClientCache CLIENT_CACHE = ClientCache.getInstance();
 

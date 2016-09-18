@@ -6,9 +6,6 @@ import ru.mitroshkin.model.pet.Pet;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by alex on 25.08.2016.
- */
 interface Storage {
 
     /**

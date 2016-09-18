@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 23.08.2016.
- */
 public class EditClientServlet extends HttpServlet {
     private static final String EDIT_CLIENT = "/view/EditClient.jsp";
 

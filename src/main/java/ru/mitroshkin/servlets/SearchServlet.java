@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 17.09.2016.
- */
 public class SearchServlet extends HttpServlet {
     private static final String SEARCH = "/view/Search.jsp";
 

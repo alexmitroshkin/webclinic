@@ -87,23 +87,22 @@ public class Pet {
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (this != null ? client.hashCode() : 0);
-        result = 31 * result + (this != null ? this.type.hashCode() : 0);
-        result = 31 * result + (this != null ? this.age : 0);
+        final int prime = 37;
+        int result = 1;
+        result = prime * result + (name != null ? name.hashCode() : 0);
+        result = prime * result + (type != null ? type.hashCode() : 0);
+        result = prime * result + (this.age);
         return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj){
-            return true;
-        }
-        if (!(obj instanceof Pet)){
-            return false;
-        }
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Pet pet = (Pet) obj;
-        if (name != null ? name.equals(pet.name) : pet.name != null) return false;
-        return !(client != null  ? !client.equals(pet.client) : pet.client != null);
+        if (!this.type.equals(pet.type)) return false;
+        if (this.age != pet.age) return false;
+        if (!this.client.equals(pet.client)) return false;
+        return true;
     }
 }
