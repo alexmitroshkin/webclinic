@@ -24,27 +24,23 @@ public class HibernateStorage implements Storage {
     @Override
     public Collection<Client> listClients() {
         List<Client> clients = null;
-        Session session = factory.openSession();
         Transaction tx = null                ;
-        try {
+        try(Session session = factory.openSession();) {
             tx = session.beginTransaction();
             clients = session.createQuery("from Client").list();
             tx.commit();
         }catch (HibernateException e){
             if (tx!=null) tx.rollback();
             e.printStackTrace();
-        }finally {
-            session.close();
         }
         return clients;
     }
 
     @Override
     public int addClient(Client client) {
-        Session sesion = factory.openSession();
         Transaction tx = null;
         int id = 0;
-        try {
+        try(Session sesion = factory.openSession();) {
             tx = sesion.beginTransaction();
             sesion.save(client);
             id = client.getId();
@@ -52,8 +48,6 @@ public class HibernateStorage implements Storage {
         } catch (HibernateException e){
             if (tx!=null) tx.rollback();
             e.printStackTrace();
-        } finally {
-            sesion.close();
         }
         return id;
     }
@@ -129,7 +123,6 @@ public class HibernateStorage implements Storage {
             if (tx!=null) tx.rollback();
             e.printStackTrace();
         }
-
     }
 
     @Override
