@@ -97,6 +97,7 @@ public class Pet {
 
     @Override
     public boolean equals(Object obj) {
+        if (this.hashCode() != obj.hashCode()) return false;
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Pet pet = (Pet) obj;
